@@ -10,11 +10,19 @@ from fastapi.middleware.cors import CORSMiddleware
 # from langchain.chains import create_history_aware_retriever,create_retrieval_chain
 # from langchain.chains.combine_documents import create_stuff_documents_chain
 from pydantic import  BaseModel
-
+from dotenv import load_dotenv
 
 app = FastAPI()
 
+load_dotenv()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:3000'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 class DataModel(BaseModel):
     data: str
